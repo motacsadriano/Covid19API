@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/covid19")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Covid19HealthCheckController {
 
 	@Autowired
@@ -29,6 +31,7 @@ public class Covid19HealthCheckController {
 		this.covid19HealthCheckService = service;
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@RequestMapping(value = "/healthcheck", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<String> saveForm(@RequestBody Covid19HealthCheck covid19HealthCheck) throws JsonProcessingException {
 		
@@ -70,6 +73,7 @@ public class Covid19HealthCheckController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/healthcheck", method = RequestMethod.GET)
 	public List<Covid19HealthCheck> findAll() {
 		return this.covid19HealthCheckService.findAll();
