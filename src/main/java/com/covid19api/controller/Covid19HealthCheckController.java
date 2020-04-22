@@ -31,7 +31,6 @@ public class Covid19HealthCheckController {
 		this.covid19HealthCheckService = service;
 	}
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@RequestMapping(value = "/healthcheck", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<String> saveForm(@RequestBody Covid19HealthCheck covid19HealthCheck) throws JsonProcessingException {
 		
@@ -73,7 +72,6 @@ public class Covid19HealthCheckController {
 		}
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/healthcheck", method = RequestMethod.GET)
 	public List<Covid19HealthCheck> findAll() {
 		return this.covid19HealthCheckService.findAll();

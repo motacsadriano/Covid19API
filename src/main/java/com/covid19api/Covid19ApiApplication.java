@@ -3,6 +3,8 @@ package com.covid19api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.google.common.base.Predicates;
 
@@ -27,5 +29,16 @@ public class Covid19ApiApplication {
 	            .apis(RequestHandlerSelectors.any())
 	            .paths(Predicates.not(PathSelectors.regex("/error.*")))
 	            .build();
+	}
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/covid19/healthcheck").allowedOrigins("*").allowedHeaders("*");
+				registry.addMapping("/covid19/healthcheck").allowedOrigins("http://localhost:4200").allowedHeaders("*");
+			}
+		};
 	}
 }
