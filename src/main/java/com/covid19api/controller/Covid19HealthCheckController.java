@@ -37,12 +37,9 @@ public class Covid19HealthCheckController {
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		String today = format.format(new GregorianCalendar().getTime());
 
-		System.out.println("today: "+today);
 		List<Covid19HealthCheck> list = this.covid19HealthCheckService.findByEmail(covid19HealthCheck.getEmail());
 		
 		for (Covid19HealthCheck healthCheck : list) {
-			System.out.println("format.format(healthCheck.getReplyFormDate()))>>> "+format.format(healthCheck.getReplyFormDate()));
-			
 			if(today.equals(format.format(healthCheck.getReplyFormDate()))) {
 				return new ResponseEntity<String>("You already answered this form today. Please, we receive only one form reply per day. Try it tomorrow", HttpStatus.FORBIDDEN);
 			}
